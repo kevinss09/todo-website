@@ -5,9 +5,9 @@ const todosSchema = new mongoose.Schema({
 		type: String,
 		require: true,
 	},
-	Date: {
-		type: Date,
-		default: Date.now,
+	time: {
+		type: String,
+		require: true,
 	},
 });
 

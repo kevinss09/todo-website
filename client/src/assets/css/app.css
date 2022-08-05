@@ -9,7 +9,7 @@
 }
 html {
 	background-color: #4d79ff;
-	min-height: 100vh;
+	/* min-height: 100vh; */
 }
 
 input:checked + p {

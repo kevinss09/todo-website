@@ -1,5 +1,5 @@
 import "./assets/css/app.css";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { getDate, getDay, getYear } from "./Date.js";
 import Modal from "./components/Modal";
 
@@ -8,6 +8,13 @@ function App() {
 	const [date, setDate] = useState("");
 	const [day, setDay] = useState("");
 	const [year, setYear] = useState("");
+	const clickForm = useRef(null);
+
+	const handleSubmit = () => {
+		{
+			clickForm.current.submit();
+		}
+	};
 
 	// this is for the toggle effect
 	const [showModal, setShowModal] = useState(false);
@@ -41,7 +48,7 @@ function App() {
 	return (
 		<>
 			<Modal showModal={showModal} setShowModal={setShowModal} />
-			<div className="box max-w-md mb-14 mt-28 mx-auto border rounded-lg shadow-lg bg-white relative">
+			<div className="box max-w-md md:mb-14 md:mt-28 mx-auto border rounded-lg shadow-lg bg-white relative">
 				<div className="top h-28 flex w-full flex-row relative border-b-2 border-b-gray-200">
 					<div className="top-left flex justify-center w-2/3 h-full flex-col pl-9">
 						<h5 className="text-xl text-gray-600">
@@ -59,45 +66,31 @@ function App() {
 						</button>
 					</div>
 				</div>
-				<form action="/delete" method="post">
-					<div className=" todo h-24 flex w-full flex-row relative items-center justify-between border-b-2 border-b-gray-200">
-						<div className="flex flex-row relative items-center justify-center pl-9">
-							<input type="checkbox" name="checkbox" />
-							<p className="ml-4 text-xl text-gray-600 font-bold">
-								Cooking one egg
-							</p>
-						</div>
-						<div className="pr-7">
-							<h5 className="text-sm opacity-60">8.00 AM</h5>
-						</div>
-					</div>
-				</form>
-				<form action="/delete" method="post">
-					<div className=" todo h-24 flex w-full flex-row relative items-center justify-between border-b-2 border-b-gray-200">
-						<div className="flex flex-row relative items-center justify-center pl-9">
-							<input type="checkbox" name="checkbox" />
-							<p className="ml-4 text-xl text-gray-600 font-bold">
-								Cleaning the dish
-							</p>
-						</div>
-						<div className="pr-7">
-							<h5 className="text-sm opacity-60">11.00 AM</h5>
-						</div>
-					</div>
-				</form>
-				<form action="/delete" method="post">
-					<div className=" todo h-24 flex w-full flex-row relative items-center justify-between">
-						<div className="flex flex-row relative items-center justify-center pl-9">
-							<input type="checkbox" name="checkbox" />
-							<p className="ml-4 text-xl text-gray-600 font-bold">
-								Wash my Restroom
-							</p>
-						</div>
-						<div className="pr-7">
-							<h5 className="text-sm opacity-60">13.00 AM</h5>
-						</div>
-					</div>
-				</form>
+				{items.map((item, index) => {
+					return (
+						<form action="/delete" method="post" ref={clickForm}>
+							<div
+								className=" todo h-24 flex w-full flex-row relative items-center justify-between border-b-2 border-b-gray-200"
+								key={index}
+							>
+								<div className="flex flex-row relative items-center justify-center pl-9">
+									<input
+										type="checkbox"
+										name="checkbox"
+										onChange={handleSubmit}
+									/>
+									<p className="ml-4 text-xl text-gray-600 font-bold">
+										{item.name}
+									</p>
+								</div>
+								<input type="hidden" name="id" value={item._id} />
+								<div className="pr-7">
+									<h5 className="text-sm opacity-60">{item.time}</h5>
+								</div>
+							</div>
+						</form>
+					);
+				})}
 			</div>
 		</>
 	);
