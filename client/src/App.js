@@ -48,7 +48,7 @@ function App() {
 	return (
 		<>
 			<Modal showModal={showModal} setShowModal={setShowModal} />
-			<div className="box max-w-md md:mb-14 md:mt-28 mx-auto border rounded-lg shadow-lg bg-white relative">
+			<div className="box max-w-md md:mb-14 md:mt-28 mt-28 mx-4 md:mx-auto border rounded-lg shadow-lg bg-white relative">
 				<div className="top h-28 flex w-full flex-row relative border-b-2 border-b-gray-200">
 					<div className="top-left flex justify-center w-2/3 h-full flex-col pl-9">
 						<h5 className="text-xl text-gray-600">
@@ -57,7 +57,11 @@ function App() {
 						</h5>
 						<h5 className="mt-1 text-[#4d79ff] font-semibold">{year}</h5>
 					</div>
-					<div className="top-right flex items-center w-1/3 h-full">
+					<div className="top-right flex items-center w-1/3 h-full flex-col">
+						<span className="text-[#4d79ff] text-base mt-7 font-bold">
+							{" "}
+							{items.length} task left !
+						</span>
 						<button
 							className="absolute right-8 -bottom-7 bg-orange-500 border rounded-full w-16 h-16 flex items-center justify-center"
 							onClick={openModal}
