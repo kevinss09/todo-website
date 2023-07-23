@@ -15,7 +15,6 @@ router.get("/todos", (req, res) => {
 });
 
 router.post("/addTodo", async (req, res) => {
-	console.log("TRII");
 	const todo = new Todo({
 		name: req.body.newTodo,
 		time: req.body.time,
@@ -39,7 +38,6 @@ router.post("/addTodo", async (req, res) => {
 });
 
 router.post("/delete", (req, res) => {
-	console.log("LOLOLO");
 	const id = req.body.id;
 
 	Todo.findByIdAndRemove(id, (err, removed) => {

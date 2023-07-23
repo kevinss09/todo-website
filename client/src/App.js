@@ -10,8 +10,9 @@ function App() {
 	const [year, setYear] = useState("");
 	const clickForm = useRef(null);
 
-	const handleSubmit = () => {
+	const handleSubmit = (itemId) => {
 		{
+			clickForm.current.id.value = itemId;
 			clickForm.current.submit();
 		}
 	};
@@ -81,7 +82,7 @@ function App() {
 									<input
 										type="checkbox"
 										name="checkbox"
-										onChange={handleSubmit}
+										onChange={() => handleSubmit(item._id)}
 									/>
 									<p className="ml-4 text-xl text-gray-600 font-bold">
 										{item.name}
